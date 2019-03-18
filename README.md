@@ -2,6 +2,6 @@
 
 Welcome to OCI-Terraform-Templates. 
 
-The templates is for deploying Fortinet security product line in OCI. 
+The templates are for deploying Fortinet security product line in OCI Oracle Resource Manager or Terraform CLI.
 
-The templates are just examples and variables need to changed as per the environment.
+These templates are just examples and variables need to changed as per the environment.
