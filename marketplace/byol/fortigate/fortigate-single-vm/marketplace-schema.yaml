@@ -1,0 +1,327 @@
+title: Single FortiGate VM deployment
+schemaVersion: 1.0.0
+version: "20190612"
+locale: "en"
+groupings:
+  - title: "General Configuration"
+    visible: false
+    variables:
+    - tenancy_ocid
+    - compartment_ocid
+    - region    
+    - mp_listing_id
+    - mp_listing_resource_id
+    - mp_listing_resource_version
+
+  - title: "FortiGate VM Configuration"
+    variables:
+    - vm_display_name
+    - compute_shape
+    - block_volume_size
+    - fortigate_license_key   
+    - availability_domain        
+
+  - title: "VCN Configuration"
+    variables:
+    - vcn_cidr_block
+    - vcn_display_name
+    - vcn_dns_label
+
+  - title: "Configure Public Facing Subnet Interface"
+    variables:
+    - assign_public_ip      
+    - untrust_subnet_cidr_block
+    - untrust_subnet_dns_label    
+  
+  - title: "Configure Protected Subnet Interface"
+    variables:
+    - trust_subnet_cidr_block    
+    - trust_subnet_dns_label
+
+  - title: "Advanced Configuration"
+    variables:
+    - customize_config 
+    - block_volume_display_name  
+    - igw_display_name
+    - trust_vnic_display_name
+    - trust_vnic_hostname_label
+    - trust_subnet_display_name
+    - trust_routetable_display_name
+    - trust_security_list_display_name
+    - untrust_vnic_hostname_label
+    - untrust_vnic_display_name
+    - untrust_subnet_display_name  
+    - untrust_routetable_display_name
+    - untrust_routetable_destination_cidr_block    
+    - untrust_security_list_display_name    
+    
+  
+
+variables:
+
+  assign_public_ip:
+    type: boolean
+    default: true
+    title: "Assign Public IP"  
+    description: "Assign Public IP on Public Facing Interface"
+
+  customize_config:
+    type: boolean
+    default: false
+    title: "Additional Customization"  
+
+# compartmentId dynamic dropdown
+  tenancy_ocid:
+    # type: oci:session:tenancy:id
+    visible: false
+    type: string
+    required: true
+    title: "Tenancy OCID"
+    description: "Tenancy OCID"
+
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    # type: string
+    required: true
+    title: "FortiGate Compartment"
+    description: "The compartment in which to create FortiGate instance(s)"
+
+  availability_domain:
+    type: oci:identity:availabilitydomain:name
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    required: true
+    default: 1
+    title: "Availability Domain"
+    description: "Availability Domain"
+
+  region:
+    type: oci:identity:region:name
+    title: Region
+    visible: false
+    description: The region in which to create all resources
+    required: true    
+    
+  vcn_cidr_block:
+    type: string  
+    pattern: "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(\\d|[1-2]\\d|3[0-2]))?$"
+    required: true
+    default: "10.2.0.0/16"
+    title: "VCN CIDR"
+    description: "VCN CIDR"
+
+  vcn_display_name:
+    type: string
+    required: true
+    default: "fortigate-vcn"
+    title: "VCN Name"
+    description: "VCN Name"
+
+  vcn_dns_label:
+    type: string
+    required: true
+    minLength: 1
+    maxLength: 15
+    default: "fortigatevcn"
+    title:  "VCN DNS Label"
+    description: "VCN DNS Label"
+
+  igw_display_name:
+    type: string
+    required: true
+    default: "igw"
+    visible: customize_config
+    title: "Internet Gateway Name"
+    description: "Internet Gateway Name"
+
+  untrust_subnet_display_name:
+    type: string
+    required: true
+    default: "public"
+    visible: customize_config
+    title: "Public Facing Subnet Name"
+    description: "Public Facing Subnet Name"
+
+  untrust_subnet_cidr_block:
+    type: string
+    pattern: "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(\\d|[1-2]\\d|3[0-2]))?$"
+    required: true
+    default: "10.2.1.0/24"
+    title: "Public Facing Subnet CIDR"
+    description: "Public Facing Subnet CIDR"
+
+  untrust_subnet_dns_label:
+    type: string
+    required: true
+    minLength: 1
+    maxLength: 15
+    default: "public"   
+    title: "Public Facing Subnet DNS Label"
+    description: "Public Facing Subnet DNS Label"
+
+  untrust_routetable_display_name:
+    type: string
+    required: true
+    default: "public-rt"
+    visible: customize_config
+    title: "Public Facing Subnet Route Table Name"
+    description: "Public Facing Subnet Route Table Name"
+  
+  untrust_routetable_destination_cidr_block:
+    type: string
+    pattern: "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(\\d|[1-2]\\d|3[0-2]))?$"
+    required: true
+    default: "0.0.0.0/0"
+    visible: customize_config
+    title: "Public Facing Subnet Route table Destination CIDR"
+    description: "Public Facing Subnet Route table Destination CIDR"
+
+  untrust_security_list_display_name:
+    type: string
+    required: true
+    default: "public-sl"
+    visible: customize_config
+    title: "Public Facing Subnet Security List Name"
+    description: "Public Facing Subnet Security List Name"
+
+  trust_subnet_display_name:
+    type: string
+    required: true
+    default: "protected"
+    visible: customize_config
+    title: "Protected Subnet Name"
+    description: "Protected Subnet Name"
+
+  trust_subnet_cidr_block:
+    type: string
+    pattern: "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/(\\d|[1-2]\\d|3[0-2]))?$"
+    required: true
+    default: "10.2.2.0/24"
+    title: "Protected Subnet CIDR"
+    description: "Protected Subnet CIDR"
+
+
+  trust_subnet_dns_label:
+    type: string
+    required: true
+    minLength: 1
+    maxLength: 15
+    default: "protected"
+    title: "Protected Subnet DNS Label"
+    description: "Protected Subnet DNS Label"
+
+  trust_routetable_display_name:
+    type: string
+    required: true
+    default: "protected-rt"
+    visible: customize_config
+    title:  "Protected Subnet Route Table Name"
+    description: "Protected Subnet Route Table Name"
+
+  trust_security_list_display_name:
+    type: string
+    required: true
+    default: "protected-sl"
+    visible: customize_config
+    title: "Protected Subnet Security List Name"
+    description: "Protected Subnet Security List Name"
+
+  vm_display_name:
+    type: string
+    required: true
+    default: "fortigate-vm"
+    title: "FortiGate VM Name"
+    description: "FortiGate VM Name"
+
+  block_volume_display_name:
+    type: string
+    required: true
+    default: "fortigate"
+    visible: customize_config
+    title: "Block Volume Name"
+    description: "Block Volume Name"
+
+  block_volume_size:
+    type: integer
+    required: true
+    default: 50
+    minimum: 50
+    title: "Block Volume Size"
+    description: "Block Volume size"
+
+  untrust_vnic_hostname_label:
+    type: string
+    required: true    
+    minLength: 1
+    maxLength: 63
+    default: "fortigate"
+    visible: customize_config
+    title: "Public Facing Subnet VM Hostname"
+    description: "Public Facing Subnet VM Hostname"
+
+  untrust_vnic_display_name:
+    type: string
+    required: true
+    default: "port1"
+    visible: customize_config
+    title: "Public Facing Subnet vNIC Name"
+    description: "Public Facing Subnet vNIC Name"
+
+  trust_vnic_display_name:
+    type: string
+    required: true
+    default: "port2"
+    visible: customize_config
+    title: "Protected Subnet vNIC Name"
+    description: "Protected Subnet vNIC Name"
+
+  trust_vnic_hostname_label:
+    type: string
+    required: true
+    minLength: 1
+    maxLength: 63
+    default: "fortigate"
+    visible: customize_config
+    title: "Protected Subnet VM Hostname"
+    description: "Protected Subnet VM Hostname"
+
+  vm_vnic_display_name:
+    type: string
+    required: true
+    default: "vnic1"
+    visible: false
+    title: "Primary FortiGate VM vNIC Name"
+    description: "Primary FortiGate VM vNIC Name"
+
+  fortigate_license_key:
+    type: string
+    required: false
+    title: "FortiGate License Key"    
+    description: "FortiGate License Key"
+
+  compute_shape:
+    type: oci:core:instanceshape:name
+    default: "VM.Standard2.4"
+    #type: string
+    title: "Compute Shape"
+    required: true
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      imageId: ${mp_listing_resource_id}
+      
+  mp_listing_id:
+    type: string    
+    required: true    
+    description: "Marketplace Listing ID"
+
+  mp_listing_resource_id:
+    type: oci:core:image:id
+    required: true
+    description: "Marketplace Image OCID"
+    dependsOn:
+      compartmentId: ${compartment_ocid} 
+
+  mp_listing_resource_version:
+    type: string
+    required: true
+    description: "Marketplace Listing package version"
