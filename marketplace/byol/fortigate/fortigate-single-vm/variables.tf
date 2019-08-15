@@ -1,19 +1,19 @@
-#marketplace image variables
-variable "mp_listing_id" {
-}
-variable "mp_listing_resource_id" {
-}
-variable "mp_listing_resource_version" {  
-}
+// variable "tenancy_ocid" {
+//   default = ""
+// }
 
-variable "tenancy_ocid" {}
-
-variable "region" {}
+// variable "region" {
+//   default = ""
+// }
 
 # Choose an Availability Domain (1,2,3)
-variable "availability_domain" {}
+variable "availability_domain" {
+  default = ""
+}
 
-variable "compartment_ocid" {}
+variable "compartment_ocid" {
+  default = ""
+}
 
 variable "vcn_cidr_block" {
   default = "10.2.0.0/16"
@@ -115,7 +115,6 @@ variable "block_volume_display_name" {
 variable "block_volume_size" {
   default = "50" //GB
 }
-
 
 variable "customize_config" {
   default = "false"

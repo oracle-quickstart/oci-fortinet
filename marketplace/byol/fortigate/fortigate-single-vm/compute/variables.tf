@@ -3,10 +3,9 @@ variable "use_marketplace_image" {
 }
 
 variable "custom_image_id" {
-    default = ""
+  default = ""
 }
 
-variable "tenancy_ocid" {}
 variable "compartment_ocid" {}
 variable "availability_domain" {}
 variable "vm_display_name" {}

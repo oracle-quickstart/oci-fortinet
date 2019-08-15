@@ -1,8 +1,7 @@
-// output "instance-public-ip" {
-//   depends_on = ["data.oci_core_vnic.InstanceVnic"]
-//   value = ["${data.oci_core_vnic.InstanceVnic.public_ip_address}"]
-// }
+output "instance-public-ip" {
+  value = "${data.oci_core_instance.vm.public_ip}"
+}
 
 output "instance-id" {
-  value = ["${oci_core_instance.vm.id}"]
+  value = "${oci_core_instance.vm.id}"
 }

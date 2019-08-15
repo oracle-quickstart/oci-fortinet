@@ -27,4 +27,3 @@ variable "default_dhcp_options_id" {
 variable "default_security_list_id" {
   default = ""
 }
-

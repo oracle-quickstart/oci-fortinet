@@ -45,6 +45,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust" {
     display_name           = "${var.trust_vnic_display_name}"
     assign_public_ip       = false
     skip_source_dest_check = true
+
     // private_ip             = "${var.trust_primary_private_ip}"  
   }
 }
@@ -53,8 +54,10 @@ resource "oci_core_vnic_attachment" "vnic_attach_trust" {
 //   #Get Primary VNIC id
 //   vnic_id = "${element(oci_core_vnic_attachment.vnic_attach_trust.*.vnic_id, 0)}"
 
+
 //   #Optional	
 //   display_name   = "trust_floating_ip"
 //   hostname_label = "${var.trust_vnic_hostname_label}"
 //   // ip_address     = "${var.trust_floating_private_ip}"
 // }
+
