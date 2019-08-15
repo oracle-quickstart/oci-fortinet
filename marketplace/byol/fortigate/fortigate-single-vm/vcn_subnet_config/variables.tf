@@ -35,6 +35,7 @@ variable "trust_security_list_id" {
 variable "untrust_routetable_id" {
   default = ""
 }
+
 variable "trust_routetable_id" {
   default = ""
 }

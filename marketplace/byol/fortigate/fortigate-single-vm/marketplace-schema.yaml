@@ -1,14 +1,18 @@
-title: Single FortiGate VM deployment
-schemaVersion: 1.0.0
-version: "20190612"
+title: "Fortinet FortiGate-VM"
+description: "Fortinet FortiGate Single VM"
+schemaVersion: 1.1.0
+version: "20190304"
+logoUrl: "https://cloudmarketplace.oracle.com/marketplace/content?contentId=61333089"
+source:
+  type: marketplace
+  reference: 56967152
+
 locale: "en"
 groupings:
   - title: "General Configuration"
     visible: false
     variables:
-    - tenancy_ocid
     - compartment_ocid
-    - region    
     - mp_listing_id
     - mp_listing_resource_id
     - mp_listing_resource_version
@@ -70,14 +74,13 @@ variables:
     default: false
     title: "Additional Customization"  
 
-# compartmentId dynamic dropdown
-  tenancy_ocid:
-    # type: oci:session:tenancy:id
-    visible: false
-    type: string
-    required: true
-    title: "Tenancy OCID"
-    description: "Tenancy OCID"
+  # tenancy_ocid:
+  #   # type: oci:session:tenancy:id
+  #   visible: false
+  #   type: string
+  #   required: true
+  #   title: "Tenancy OCID"
+  #   description: "Tenancy OCID"
 
   compartment_ocid:
     type: oci:identity:compartment:id
@@ -85,6 +88,12 @@ variables:
     required: true
     title: "FortiGate Compartment"
     description: "The compartment in which to create FortiGate instance(s)"
+
+  # region:
+  #   type: oci:identity:region:name
+  #   title: Region
+  #   description: The region in which to create all resources
+  #   required: true    
 
   availability_domain:
     type: oci:identity:availabilitydomain:name
@@ -94,13 +103,6 @@ variables:
     default: 1
     title: "Availability Domain"
     description: "Availability Domain"
-
-  region:
-    type: oci:identity:region:name
-    title: Region
-    visible: false
-    description: The region in which to create all resources
-    required: true    
     
   vcn_cidr_block:
     type: string  
@@ -325,3 +327,28 @@ variables:
     type: string
     required: true
     description: "Marketplace Listing package version"
+
+outputGroups:
+  - title: "Output Group"
+    outputs:
+      - ${instance-public-ip}
+      - ${instance-id}
+
+outputs:
+  instance-public-url:
+    type: link
+    title: FortiGate VM
+    visible: false
+
+  instance-public-ip:
+    type: link
+    title: Public IP
+    visible: true
+  
+  instance-id:
+    type: string
+    title: "Instance ocid"
+    displayText: "FortiGate instance ocid"
+    visible: true
+  
+primaryOutputButton: ${instance-public-url}

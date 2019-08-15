@@ -6,8 +6,7 @@ resource "oci_core_volume" "vm_volume" {
 }
 
 resource "oci_core_volume_attachment" "vm_volume_attach" {
-  attachment_type = "iscsi"
-  compartment_id  = "${var.compartment_ocid}"
+  attachment_type = "paravirtualized"
   instance_id     = "${oci_core_instance.vm.id}"
   volume_id       = "${oci_core_volume.vm_volume.id}"
 }
