@@ -1,13 +1,13 @@
 #This block of code is failing on ORM when destroying resources.
-output "instance-public-ip" {
+output "instance_public_ip" {
   value = "${module.fortigate-vm.instance-public-ip}"
 }
 
-output "instance-public-url" {
+output "instance_public_url" {
   value = "${format("https://%s", module.fortigate-vm.instance-public-ip)}"
 }
 
-output "instance-id" {
+output "instance_id" {
   value = "${module.fortigate-vm.instance-id}"
 }
 
