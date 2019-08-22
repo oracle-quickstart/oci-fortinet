@@ -331,24 +331,24 @@ variables:
 outputGroups:
   - title: "Output Group"
     outputs:
-      - ${instance-public-ip}
-      - ${instance-id}
+      - ${instance_public_ip}
+      - ${instance_id}
 
 outputs:
-  instance-public-url:
+  instance_public_url:
     type: link
     title: FortiGate VM
     visible: false
 
-  instance-public-ip:
+  instance_public_ip:
     type: link
     title: Public IP
     visible: true
   
-  instance-id:
+  instance_id:
     type: string
     title: "Instance ocid"
     displayText: "FortiGate instance ocid"
     visible: true
   
-primaryOutputButton: ${instance-public-url}
+primaryOutputButton: ${instance_public_url}
