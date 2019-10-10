@@ -1,6 +1,6 @@
-# oci-quickstart-fortinet
+# oci-fortinet
 
-These are Terraform modules that deploy Fortinet on Oracle Cloud Infrastructure (OCI). They are developed jointly by Fortinet and Oracle.  For instructions on how to use this material and details on getting support from the vendor that maintains this material, please contact them directly.
+These are Terraform modules that deploy Fortinet on Oracle Cloud Infrastructure (OCI). They are developed jointly by Fortinet and Oracle.
 
 ## Prerequisites
 First off you'll need to do some pre deploy setup.  That's all detailed [here](https://github.com/oracle/oci-quickstart-prerequisites).
