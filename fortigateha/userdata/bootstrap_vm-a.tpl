@@ -42,7 +42,6 @@ config system interface
         set mtu 9000
     next
     edit port4
-        set vdom "root"
         set mode static
         set ip ${hb_ip} ${hb_ip_mask}
         set allowaccess ping https ssh http fgfm
