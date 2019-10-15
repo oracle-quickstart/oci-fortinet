@@ -112,7 +112,7 @@ variable "vm_image_ocid" {
     // FortiGate-6.0.3-emulated"
 	// Example:
   //us-phoenix-1 = "ocid1.image.oc1.phx.aaaaaaaaupbfz5f5hdvejulmalhyb6goieolullgkpumorbvxlwkaowglslq"
-  us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaajjozwgudxjj4ao43ma5j3a7ytauypmyod2ebv6nfahwwurknrsqa"
+  // us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaajjozwgudxjj4ao43ma5j3a7ytauypmyod2ebv6nfahwwurknrsqa"
   //PV Mode
   //us-ashburn-1 = "ocid1.image.oc1.iad.aaaaaaaa64vovumtrx5gqk6uei4dkopjjbtq3dwl5nirx5ah5kbq7tubclha"
 
