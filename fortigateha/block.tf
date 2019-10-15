@@ -6,7 +6,7 @@ resource "oci_core_volume" "vm_volume-a" {
 }
 
 resource "oci_core_volume_attachment" "vm_volume_attach-a" {
-  attachment_type = "iscsi"
+  attachment_type = "paravirtualized"
   compartment_id  = "${var.compartment_ocid}"
   instance_id     = "${oci_core_instance.vm-a.id}"
   volume_id       = "${oci_core_volume.vm_volume-a.id}"
@@ -21,7 +21,7 @@ resource "oci_core_volume" "vm_volume-b" {
 }
 
 resource "oci_core_volume_attachment" "vm_volume_attach-b" {
-  attachment_type = "iscsi"
+  attachment_type = "paravirtualized"
   compartment_id  = "${var.compartment_ocid}"
   instance_id     = "${oci_core_instance.vm-b.id}"
   volume_id       = "${oci_core_volume.vm_volume-b.id}"
