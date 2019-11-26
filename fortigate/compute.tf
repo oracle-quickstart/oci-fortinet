@@ -1,5 +1,5 @@
 resource "oci_core_instance" "vm" {
-  availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 1],"name")}"
+  availability_domain = "${data.oci_identity_availability_domain.ad.name}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "fortigate_vm"
   shape               = "${var.instance_shape}"
