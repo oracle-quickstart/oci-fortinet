@@ -1,6 +1,7 @@
 # Gets a list of Availability Domains
-data "oci_identity_availability_domains" "ads" {
+data "oci_identity_availability_domains" "ad" {
   compartment_id = "${var.tenancy_ocid}"
+  ad_number = "${var.availability_domain}"
 }
 
 # Gets the boot volume attachments for each instance
