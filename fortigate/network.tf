@@ -32,7 +32,7 @@ resource "oci_core_route_table" "untrust_routetable" {
 }
 
 resource "oci_core_subnet" "untrust_subnet" {
-  availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 1],"name")}"
+  availability_domain = "${data.oci_identity_availability_domain.ad.name}"
   cidr_block          = "${var.untrust_subnet_cidr}"
   display_name        = "untrust"
   compartment_id      = "${var.compartment_ocid}"
@@ -122,7 +122,7 @@ resource "oci_core_security_list" "untrust_security_list" {
 ###############################
 
 resource "oci_core_subnet" "trust_subnet" {
-  availability_domain        = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 1],"name")}"
+  availability_domain        = "${data.oci_identity_availability_domain.ad.name}"
   cidr_block                 = "${var.trust_subnet_cidr}"
   display_name               = "trust"
   compartment_id             = "${var.compartment_ocid}"
