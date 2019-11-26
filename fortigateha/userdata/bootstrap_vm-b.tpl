@@ -42,7 +42,7 @@ config system interface
         set ip ${hb_ip} ${hb_ip_mask}
         set allowaccess ping https ssh http fgfm
         set type physical
-        set description "hbdev"
+        set description "HA"
         set alias hb
         set mtu-override enable
         set mtu 9000
