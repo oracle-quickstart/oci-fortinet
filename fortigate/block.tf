@@ -1,5 +1,5 @@
 resource "oci_core_volume" "vm_volume" {
-  availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 1],"name")}"
+  availability_domain = "${data.oci_identity_availability_domain.ad.name}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "vm_volume"
   size_in_gbs         = "${var.volume_size}"
