@@ -11,7 +11,6 @@ config system global
 end
 config system interface
     edit port1
-        set mode static
         set ip ${mgmt_ip} ${mgmt_ip_mask}
         set allowaccess ping https ssh http fgfm
         set type physical
@@ -22,10 +21,9 @@ config system interface
     next
     edit port2        
         set vdom "root"
-        set mode static
         set ip ${untrust_floating_private_ip} ${untrust_floating_private_ip_mask}
         set type physical
-        set description "public"
+        set description "Untrust"
         set alias untrust
         set mtu-override enable
         set mtu 9000
@@ -33,16 +31,14 @@ config system interface
     next
     edit port3        
         set vdom "root"
-        set mode static
         set ip ${trust_floating_private_ip} ${trust_floating_private_ip_mask}
         set type physical
-        set description "internal"
+        set description "Trust"
         set alias trust
         set mtu-override enable
         set mtu 9000
     next
     edit port4
-        set mode static
         set ip ${hb_ip} ${hb_ip_mask}
         set allowaccess ping https ssh http fgfm
         set type physical
@@ -87,11 +83,9 @@ end
 config system sdn-connector
     edit "oci-sdn"
         set type oci
+        set ha-status enable
         set tenant-id ${tenancy_ocid}
-        set user-id ${oci_user_ocid}
         set compartment-id ${compartment_ocid}
-        set region ${sdn_region}
-        set oci-cert ${sdn_oci_certificate_name}
     next
 end
 
