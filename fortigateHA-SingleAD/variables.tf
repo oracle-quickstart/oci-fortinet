@@ -1,14 +1,12 @@
 variable "tenancy_ocid" {}
-variable "oci_user_ocid" {}
-// variable "user_ocid" {}
-// variable "fingerprint" {}
+variable "compartment_ocid" {}
+variable "user_ocid" {}
+variable "fingerprint" {}
 
-// variable "private_key_path" {}
+variable "private_key_path" {}
 variable "region" {
   default = "us-ashburn-1"
 }
-
-variable "compartment_ocid" {}
 
 ##VCN and SUBNET ADDRESSESS
 variable "vcn_cidr" {
@@ -111,13 +109,7 @@ variable "vm_image_ocid" {
     // See https://docs.us-phoenix-1.oraclecloud.com/images/
     // FortiGate-6.0.3-emulated"
 	// Example:
-  //us-phoenix-1 = "ocid1.image.oc1.phx.aaaaaaaaupbfz5f5hdvejulmalhyb6goieolullgkpumorbvxlwkaowglslq"
-  // us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaajjozwgudxjj4ao43ma5j3a7ytauypmyod2ebv6nfahwwurknrsqa"
-  //PV Mode
-  //us-ashburn-1 = "ocid1.image.oc1.iad.aaaaaaaa64vovumtrx5gqk6uei4dkopjjbtq3dwl5nirx5ah5kbq7tubclha"
-
-  //  eu-frankfurt-1 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaa7d3fsb6272srnftyi4dphdgfjf6gurxqhmv6ileds7ba3m2gltxq"
-  //uk-london-1    = "ocid1.image.oc1.uk-london-1.aaaaaaaaa6h6gj6v4n56mqrbgnosskq63blyv2752g36zerymy63cfkojiiq"
+  //us-ashburn-1=""
   }
 }
 
