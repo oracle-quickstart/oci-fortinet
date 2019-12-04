@@ -19,7 +19,8 @@ config system interface
         set mtu-override enable
         set mtu 9000
     next
-    edit port2        
+    edit port2
+        set mode static     
         set vdom "root"
         set ip ${untrust_floating_private_ip} ${untrust_floating_private_ip_mask}
         set type physical
@@ -29,7 +30,8 @@ config system interface
         set mtu 9000
         set secondary-IP enable
     next
-    edit port3        
+    edit port3
+        set mode static        
         set vdom "root"
         set ip ${trust_floating_private_ip} ${trust_floating_private_ip_mask}
         set type physical
@@ -39,6 +41,7 @@ config system interface
         set mtu 9000
     next
     edit port4
+        set mode static
         set ip ${hb_ip} ${hb_ip_mask}
         set allowaccess ping https ssh http fgfm
         set type physical
@@ -88,6 +91,14 @@ config system sdn-connector
         set compartment-id ${compartment_ocid}
     next
 end
+
+--==OCI==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="license"
+
+${license_file}
 
 --==OCI==--
 
