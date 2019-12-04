@@ -30,10 +30,10 @@ resource "oci_core_instance" "vm" {
 
 
   //required for metadata setup via cloud-init
-  //   metadata {
+  metadata {
   //     ssh_authorized_keys = "${var.ssh_public_key}"
-  //     user_data           = "${base64encode(file(var.BootStrapFile))}"
-  //   }
+       user_data           = ${base64encode(data.template_file.vm-userdata.rendered)}"
+      }
 
   timeouts {
     create = "60m"
@@ -61,4 +61,14 @@ resource "oci_core_private_ip" "trust_private_ip" {
   display_name   = "trust_ip"
   hostname_label = "trust"
   ip_address     = "${var.trust_floating_private_ip}"
+}
+
+data "template_file" "vm-userdata" {
+  template = "${file(var.bootstrap_vm)}"
+  
+  vars {
+ 
+    license_file = "${file("${var.license_vm}")}"
+
+  }
 }

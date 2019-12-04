@@ -1,14 +1,13 @@
 variable "tenancy_ocid" {}
-// variable "user_ocid" {}
-// variable "fingerprint" {}
+variable "compartment_ocid" {}
+variable "user_ocid" {}
+variable "fingerprint" {}
 
-// variable "private_key_path" {}
+variable "private_key_path" {}
 
 variable "region" {
   default = "us-ashburn-1"
 }
-
-variable "compartment_ocid" {}
 
 variable "vcn_cidr" {
   default = "10.2.0.0/16"
@@ -17,8 +16,6 @@ variable "vcn_cidr" {
 variable "untrust_subnet_cidr" {
   default = "10.2.1.0/24"
 }
-
-
 
 variable "trust_subnet_cidr" {
   default = "10.2.2.0/24"
@@ -62,4 +59,12 @@ variable "availability_domain" {
 
 variable "volume_size" {
   default = "50" //GB
+}
+
+variable "bootstrap_vm" {
+  default = "./userdata/bootstrap_vm.tpl"
+}
+
+variable "license_vm" {
+  default = "./license/FGVMULTM19002140.lic"
 }
