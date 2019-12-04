@@ -32,7 +32,7 @@ resource "oci_core_instance" "vm" {
   //required for metadata setup via cloud-init
   metadata {
   //     ssh_authorized_keys = "${var.ssh_public_key}"
-       user_data           = ${base64encode(data.template_file.vm-userdata.rendered)}"
+       user_data           = "${base64encode(data.template_file.vm-userdata.rendered)}"
       }
 
   timeouts {
