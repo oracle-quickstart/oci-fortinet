@@ -141,7 +141,7 @@ data "template_file" "vm-a_userdata" {
     //oci_user_ocid = "${var.oci_user_ocid}"
     compartment_ocid = "${var.compartment_ocid}"
   
-    //license_file = "${file("${var.license_vm-a}")}"
+    license_file_a = "${file("${var.license_vm-a}")}"
 
   }
 }

@@ -135,16 +135,16 @@ variable "bootstrap_vm-a" {
   default = "./userdata/bootstrap_vm-a.tpl"
 }
 
-//variable "license_vm-a" {
-//  default = "./license/FGVM080000175530.lic"
-//}
+variable "license_vm-a" {
+  default = "./license/FGT-A-license-filename.lic"
+}
 
 
 variable "bootstrap_vm-b" {
  default = "./userdata/bootstrap_vm-b.tpl"
 }
 
-//variable "license_vm-b" {
-//  default = "./license/FGVM080000175531.lic"
-//}
+variable "license_vm-b" {
+  default = "./license/FGT-B-license-filename.lic"
+}
 

@@ -96,8 +96,8 @@ end
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="license"
+Content-Disposition: attachment; filename="license_vm-b"
 
-${license_file}
+${license_file_b}
 
 --==OCI==--
