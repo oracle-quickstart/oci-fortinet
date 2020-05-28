@@ -28,7 +28,7 @@ resource "oci_core_instance" "vm" {
 }
 
 data "template_file" "bootstrap" {
-  template = "${file("${path.module}/userdata/bootstrap.tpl")}"
+  template = "${file("./userdata/bootstrap.tpl")}"
 
   vars {
     vm_display_name       = "${var.vm_display_name}"
