@@ -31,7 +31,7 @@ resource "oci_core_instance" "vm-b" {
 
 
   //required for metadata setup via cloud-init
-    metadata {
+    metadata = {
       // ssh_authorized_keys = "${var.ssh_public_key}"
       user_data           = "${base64encode(data.template_file.vm-b_userdata.rendered)}"
     }
@@ -89,7 +89,7 @@ resource "oci_core_vnic_attachment" "vnic_attach_hb_b" {
 data "template_file" "vm-b_userdata" {
   template = "${file(var.bootstrap_vm-b)}"
   
-  vars {
+  vars = {
     mgmt_ip = "${var.mgmt_private_ip_primary_b}"
     mgmt_ip_mask = "255.255.255.0"
     untrust_ip = "${var.untrust_private_ip_primary_b}"
