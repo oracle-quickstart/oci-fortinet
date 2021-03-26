@@ -99,20 +99,25 @@ variable "hb_private_ip_primary_b" {
 
 
 
-// variable "vm_image_ocid" {
-//   default = "PIC or custom image OCID"
-// }
-
 variable "vm_image_ocid" {
-  type = "map"
+	//Marketplace Image 6.2.5: ocid1.image.oc1..aaaaaaaar23fvwn7vie6lnwbdpqhohsiojj4oeqdmqpdvpdjm7glncxailxa
+	//Marketplace Image 6.4.4: ocid1.image.oc1..aaaaaaaauxqbpkvj3uabe7efecnk75mmaui7lvzif6yckhplblm4sfirygwq
+	//Or Replace OCID with custom Image OCID
+	
+	//Default = Marketplace Image 6.2.5
+   default = "ocid1.image.oc1..aaaaaaaar23fvwn7vie6lnwbdpqhohsiojj4oeqdmqpdvpdjm7glncxailxa"
+}
 
-  default = {
+// variable "vm_image_ocid" {
+//  type = "map"
+
+//  default = {
     // See https://docs.us-phoenix-1.oraclecloud.com/images/
     // FortiGate-6.0.3-emulated"
 	// Example:
-    //us-ashburn-1=""
-  }
-}
+//    us-ashburn-1="ocid1.image.oc1.iad.aaaaaaaawp3jbcejr5w7mgeuodeotmvwm36g7csiymvxd6nfesz2dj4hpq4q"
+//  }
+//}
 
 variable "instance_shape" {
   default = "VM.Standard2.4"
