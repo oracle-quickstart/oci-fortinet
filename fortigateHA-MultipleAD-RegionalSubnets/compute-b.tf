@@ -1,4 +1,5 @@
 resource "oci_core_instance" "vm-b" {
+  depends_on = [oci_core_subnet.hb_subnet]
   availability_domain = data.oci_identity_availability_domain.ad-b.name
   compartment_id      = var.compartment_ocid
   display_name        = "vm-b"

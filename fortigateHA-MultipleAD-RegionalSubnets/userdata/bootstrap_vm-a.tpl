@@ -9,6 +9,12 @@ config system global
     set hostname "FortiGate-A"
     set admintimeout 60
 end
+config system admin
+    edit "admin"
+        set password "fortinet"
+    next
+end
+
 config system interface
     edit port1
         set ip ${mgmt_ip} ${mgmt_ip_mask}
@@ -19,6 +25,8 @@ config system interface
         set mtu-override enable
         set mtu 9000
     next
+end
+config system interface
     edit port2
         set mode static     
         set vdom "root"
@@ -30,6 +38,8 @@ config system interface
         set mtu 9000
         set secondary-IP enable
     next
+end
+config system interface
     edit port3
         set mode static        
         set vdom "root"
@@ -40,6 +50,8 @@ config system interface
         set mtu-override enable
         set mtu 9000
     next
+end
+config system interface
     edit port4
         set mode static
         set ip ${hb_ip} ${hb_ip_mask}
@@ -49,18 +61,6 @@ config system interface
         set alias hb
         set mtu-override enable
         set mtu 9000
-    next
-end
-
-config router static
-    edit 1        
-        set gateway ${untrust_subnet_gw}
-        set device port2
-    next
-    edit 2
-        set dst ${vcn_cidr}
-        set gateway ${trust_subnet_gw}
-        set device port3
     next
 end
 
@@ -91,7 +91,17 @@ config system sdn-connector
         set compartment-id ${compartment_ocid}
     next
 end
-
+config router static
+    edit 1        
+        set gateway ${untrust_subnet_gw}
+        set device port2
+    next
+    edit 2
+        set dst ${vcn_cidr}
+        set gateway ${trust_subnet_gw}
+        set device port3
+    next
+end
 --==OCI==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
