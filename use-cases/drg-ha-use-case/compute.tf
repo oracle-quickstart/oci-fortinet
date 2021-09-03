@@ -3,7 +3,7 @@ resource "oci_core_instance" "vm-a" {
   count = 1
   availability_domain = ( var.availability_domain_name != "" ? var.availability_domain_name : ( length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
   compartment_id      = var.compute_compartment_ocid
-  display_name        = "vm-a"
+  display_name        = "FortiGate-Primary-Firewall"
   shape               = var.vm_compute_shape
 
   create_vnic_details {
@@ -127,7 +127,7 @@ resource "oci_core_instance" "vm-b" {
   count = 1
   availability_domain = ( var.availability_domain_name != "" ? var.availability_domain_name : ( length(data.oci_identity_availability_domains.ads.availability_domains) == 1 ? data.oci_identity_availability_domains.ads.availability_domains[0].name : data.oci_identity_availability_domains.ads.availability_domains[count.index].name))
   compartment_id      = var.compute_compartment_ocid
-  display_name        = "vm-b"
+  display_name        = "FortiGate-Secondary-Firewall"
   shape               = var.vm_compute_shape
 
   create_vnic_details {

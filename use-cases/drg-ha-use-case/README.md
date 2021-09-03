@@ -35,7 +35,7 @@ You can deploy this architecture using two approach explained in each section:
 
 In this section you will follow each steps given below to create this architecture:
 
-1. Click [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://console.us-phoenix-1.oraclecloud.com/resourcemanager/stacks/create?region=home&zipUrl=https://github.com/oracle-quickstart/oci-fortinet/raw/master/use-case/drg-ha-use-case//resource-manager/fortigate-drg-ha.zip)
+1. Click [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://console.us-phoenix-1.oraclecloud.com/resourcemanager/stacks/create?region=home&zipUrl=https://github.com/oracle-quickstart/oci-fortinet/raw/master/use-cases/drg-ha-use-case//resource-manager/fortigate-drg-ha.zip)
 
     > If you aren't already signed in, when prompted, enter the tenancy and user credentials.
 
@@ -167,7 +167,7 @@ I am attaching some sample configuration from one of the Firewall-B for your ref
 ## Need Fixes
 
 Below fixes are needed:
-- Validate cloud-init part to support initial configuration on Firewall VMs.
+- Validate cloud-init part to support initial configuration on Firewall VMs even though this terraform code has that capabilities.
 
 ## Feedback 
 
