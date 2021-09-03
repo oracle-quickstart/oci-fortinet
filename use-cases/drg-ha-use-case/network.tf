@@ -167,19 +167,19 @@ resource "oci_core_route_table" "vcn_ingress_route_table" {
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_private_ip.cluster_trust_ip.id
+    network_entity_id = oci_core_private_ip.trust_private_ip.id
   }
 
   route_rules {
     destination       = "10.0.0.0/24"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_private_ip.cluster_trust_ip.id
+    network_entity_id = oci_core_private_ip.trust_private_ip.id
   }
 
   route_rules {
     destination       = "10.0.1.0/24"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_private_ip.cluster_trust_ip.id
+    network_entity_id = oci_core_private_ip.trust_private_ip.id
   }
 
 }
@@ -223,7 +223,7 @@ resource "oci_core_route_table" "service_gw_route_table_transit_routing" {
   route_rules {
     destination       = "0.0.0.0/0"
     destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_private_ip.cluster_trust_ip.id
+    network_entity_id = oci_core_private_ip.trust_private_ip.id
   }
 
 }
@@ -459,23 +459,23 @@ resource "oci_core_security_list" "allow_all_security_db" {
 }
 
 
-# ------ Create Cluster Trust Floating IP (Hub VCN)
-resource "oci_core_private_ip" "cluster_trust_ip" {
-  vnic_id      = data.oci_core_vnic_attachments.trust_attachments.vnic_attachments.0.vnic_id
-  display_name = "firewall_trust_secondary_private"
-}
+# # ------ Create Cluster Trust Floating IP (Hub VCN)
+# resource "oci_core_private_ip" "cluster_trust_ip" {
+#   vnic_id      = data.oci_core_vnic_attachments.trust_attachments.vnic_attachments.0.vnic_id
+#   display_name = "firewall_trust_secondary_private"
+# }
 
-# ------ Create Cluster Untrust Floating IP (Hub VCN)
-resource "oci_core_private_ip" "cluster_untrust_ip" {
-  vnic_id      = data.oci_core_vnic_attachments.untrust_attachments.vnic_attachments.0.vnic_id
-  display_name = "firewall_untrust_secondary_private"
-}
+# # ------ Create Cluster Untrust Floating IP (Hub VCN)
+# resource "oci_core_private_ip" "cluster_untrust_ip" {
+#   vnic_id      = data.oci_core_vnic_attachments.untrust_attachments.vnic_attachments.0.vnic_id
+#   display_name = "firewall_untrust_secondary_private"
+# }
 
-# frontend cluster ip 
-resource "oci_core_public_ip" "cluster_untrust_public_ip" {
-  count          = (var.use_existing_ip != "Create new IP") ? 0 : 1
-  compartment_id = var.network_compartment_ocid
+# # frontend cluster ip 
+# resource "oci_core_public_ip" "cluster_untrust_public_ip" {
+#   count          = (var.use_existing_ip != "Create new IP") ? 0 : 1
+#   compartment_id = var.network_compartment_ocid
 
-  lifetime      = "RESERVED"
-  private_ip_id = oci_core_private_ip.cluster_untrust_ip.id
-}
+#   lifetime      = "RESERVED"
+#   private_ip_id = oci_core_private_ip.cluster_untrust_ip.id
+# }
